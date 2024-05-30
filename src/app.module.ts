@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { BooksModule } from './books/books.module';
 import { bookService } from './books/service/books.service';
+import { AuthorsModule } from './authors/authors.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { bookService } from './books/service/books.service';
       },
     }),
     TypeOrmModule.forFeature([]),
-    BooksModule, // Register your entities
+    BooksModule,
+    AuthorsModule, // Register your entities
   ],
   controllers: [],
   providers: [bookService],
