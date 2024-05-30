@@ -1,13 +1,10 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class authorEntity {
+export class salesEntity {
   @PrimaryGeneratedColumn()
-  idAuthor: string;
+  idSale: string;
 
   @Column()
-  nameAuthor: string;
-
-  @Column()
-  lastNameAuthor: string;
+  priceSale: number;
 }
