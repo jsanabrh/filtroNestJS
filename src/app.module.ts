@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { BooksModule } from './books/books.module';
+import { bookService } from './books/service/books.service';
 
 @Module({
   imports: [
@@ -22,9 +24,10 @@ import { ConfigModule } from '@nestjs/config';
         ssl: true,
       },
     }),
-    TypeOrmModule.forFeature([]), // Register your entities
+    TypeOrmModule.forFeature([]),
+    BooksModule, // Register your entities
   ],
   controllers: [],
-  providers: [],
+  providers: [bookService],
 })
 export class AppModule {}
