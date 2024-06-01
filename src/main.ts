@@ -18,7 +18,7 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('library')
+    .setTitle('Library')
     .setDescription(`Descripción.`)
     .setVersion('1.0')
     .build();
@@ -28,6 +28,6 @@ async function bootstrap() {
   await app.listen(3000);
 
   console.log('Project started => localhost:3000');
-  console.log('Access to the project via Swagger: localhost:3000/api-doc');
+  console.log('Access to the project via Swagger: localhost:3000/api/doc');
 }
 bootstrap();

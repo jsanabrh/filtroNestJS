@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { AuthorEntity } from '../../authors/entities/author.entity';
+import { SalesEntity } from '../../sales/entities/sales.entity';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class BookEntity {
@@ -19,4 +21,10 @@ export class BookEntity {
 
   @Column()
   stockBook: number;
+
+  @ManyToOne(() => AuthorEntity, (Author) => Author.books)
+  authors: AuthorEntity;
+
+  @ManyToOne(() => SalesEntity, (Sales) => Sales.books)
+  sales: SalesEntity;
 }

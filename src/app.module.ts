@@ -16,6 +16,7 @@ import { SalesController } from './sales/controller/sales.controller';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/service/users.service';
 import { UsersController } from './users/controller/users.controller';
+import { UsersEntity } from './users/entities/users.entity';
 
 @Module({
   imports: [
@@ -32,12 +33,17 @@ import { UsersController } from './users/controller/users.controller';
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
-      entities: [BookEntity, AuthorEntity, SalesEntity],
+      entities: [BookEntity, AuthorEntity, SalesEntity, UsersEntity],
       extra: {
         ssl: true,
       },
     }),
-    TypeOrmModule.forFeature([BookEntity, AuthorEntity, SalesEntity]),
+    TypeOrmModule.forFeature([
+      BookEntity,
+      AuthorEntity,
+      SalesEntity,
+      UsersEntity,
+    ]),
     BooksModule,
     AuthorsModule,
     SalesModule,
