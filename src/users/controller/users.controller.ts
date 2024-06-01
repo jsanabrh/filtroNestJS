@@ -4,12 +4,12 @@ import { UsersService } from '../service/users.service';
 import { CreateUserDto } from '../dtos/createUser.dto';
 import { UsersEntity } from '../entities/users.entity';
 
-@ApiTags('Create User')
-@Controller('Users')
+@ApiTags('Users')
+@Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
-  @Post()
+  @Post('createUser')
   async createUser(@Body() createUser: CreateUserDto): Promise<UsersEntity> {
     return this.userService.createUser(createUser);
   }
