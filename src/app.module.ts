@@ -13,6 +13,9 @@ import { AuthorController } from './authors/controller/author.controller';
 import { SalesEntity } from './sales/entities/sales.entity';
 import { SalesService } from './sales/service/sales.service';
 import { SalesController } from './sales/controller/sales.controller';
+import { UsersModule } from './users/users.module';
+import { UsersService } from './users/service/users.service';
+import { UsersController } from './users/controller/users.controller';
 
 @Module({
   imports: [
@@ -37,9 +40,15 @@ import { SalesController } from './sales/controller/sales.controller';
     TypeOrmModule.forFeature([BookEntity, AuthorEntity, SalesEntity]),
     BooksModule,
     AuthorsModule,
-    SalesModule, // Register your entities
+    SalesModule,
+    UsersModule,
   ],
-  controllers: [BookController, AuthorController, SalesController],
-  providers: [BookService, AuthorService, SalesService],
+  controllers: [
+    BookController,
+    AuthorController,
+    SalesController,
+    UsersController,
+  ],
+  providers: [BookService, AuthorService, SalesService, UsersService],
 })
 export class AppModule {}
