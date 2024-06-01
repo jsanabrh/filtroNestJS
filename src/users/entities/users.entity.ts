@@ -1,10 +1,10 @@
 import { SalesEntity } from '../../sales/entities/sales.entity';
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class UsersEntity {
-  @PrimaryGeneratedColumn()
-  idUser: string;
+  @PrimaryColumn()
+  idUser: number;
 
   @Column()
   nameUser: string;
