@@ -1,3 +1,4 @@
+import { SalesEntity } from 'src/sales/entities/sales.entity';
 import { AuthorEntity } from '../../authors/entities/author.entity';
 import {
   Column,
@@ -5,6 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   JoinColumn,
+  ManyToMany,
 } from 'typeorm';
 
 @Entity()
@@ -33,4 +35,7 @@ export class BookEntity {
   @ManyToOne(() => AuthorEntity, (author) => author.books)
   @JoinColumn({ name: 'idAuthor' })
   author: AuthorEntity;
+
+  @ManyToMany(() => SalesEntity, (sale) => sale.books)
+  sales: SalesEntity[];
 }
