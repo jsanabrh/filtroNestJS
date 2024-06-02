@@ -3,14 +3,14 @@ import { SalesEntity } from '../../sales/entities/sales.entity';
 import {
   Column,
   Entity,
-  PrimaryGeneratedColumn,
   ManyToOne,
   DeleteDateColumn,
+  PrimaryColumn,
 } from 'typeorm';
 
 @Entity()
 export class BookEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   idBook: number;
 
   @Column()

@@ -39,7 +39,11 @@ export class BookService {
     await this.bookRepository.softDelete(idBook);
   }
 
-  async restoreUser(idBook: number): Promise<void> {
+  async restoreBook(idBook: number): Promise<void> {
     await this.bookRepository.restore(idBook);
+  }
+
+  async findAllBooks() {
+    return await this.bookRepository.find();
   }
 }
