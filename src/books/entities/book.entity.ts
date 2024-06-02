@@ -1,11 +1,17 @@
 import { AuthorEntity } from '../../authors/entities/author.entity';
 import { SalesEntity } from '../../sales/entities/sales.entity';
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  DeleteDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class BookEntity {
   @PrimaryGeneratedColumn()
-  idBook: string;
+  idBook: number;
 
   @Column()
   nameBook: string;
@@ -19,8 +25,8 @@ export class BookEntity {
   @Column()
   priceBook: string;
 
-  @Column()
-  stockBook: number;
+  @DeleteDateColumn()
+  deletedAt?: Date;
 
   @ManyToOne(() => AuthorEntity, (Author) => Author.books)
   authors: AuthorEntity;
