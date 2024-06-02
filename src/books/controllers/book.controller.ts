@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -23,6 +22,11 @@ export class BookController {
     return this.bookService.createBook(createBook);
   }
 
+  @Get('findAllBooks')
+  async findAllBooks() {
+    return this.bookService.findAllBooks();
+  }
+
   @Patch('/updateBook/:bookId')
   async updateBook(
     @Param('bookId') bookId: number,
@@ -32,21 +36,7 @@ export class BookController {
   }
 
   @Delete('/deleteBook/:bookId')
-  async softDeleteBook(
-    @Param('bookId', ParseIntPipe) bookId: number,
-  ): Promise<void> {
-    return this.bookService.softDelete(bookId);
-  }
-
-  @Patch('restore/:bookId')
-  async restoreUser(
-    @Param('bookId', ParseIntPipe) bookId: number,
-  ): Promise<void> {
-    return this.bookService.restoreBook(bookId);
-  }
-
-  @Get('findAllBooks')
-  async findAllBooks() {
-    return this.bookService.findAllBooks();
+  remove(@Param('bookId') bookId: number) {
+    return this.bookService.remove(+bookId);
   }
 }

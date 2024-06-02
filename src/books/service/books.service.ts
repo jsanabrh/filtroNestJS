@@ -17,6 +17,10 @@ export class BookService {
     return await this.bookRepository.save(book);
   }
 
+  async findAllBooks(): Promise<BookEntity[]> {
+    return await this.bookRepository.find();
+  }
+
   async updateBook(idBook: number, updateBook: UpdateBookDto): Promise<any> {
     const book = await this.bookRepository.findOne({ where: { idBook } });
     if (!book) {
@@ -31,19 +35,11 @@ export class BookService {
     return await updateBookData;
   }
 
-  async softDelete(idBook: number): Promise<void> {
-    const book = await this.bookRepository.findOne({ where: { idBook } });
+  async remove(idBook: number) {
+    const book = await this.bookRepository.delete({ idBook });
     if (!book) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException('Book not found');
     }
-    await this.bookRepository.softDelete(idBook);
-  }
-
-  async restoreBook(idBook: number): Promise<void> {
-    await this.bookRepository.restore(idBook);
-  }
-
-  async findAllBooks() {
-    return await this.bookRepository.find();
+    return book;
   }
 }
