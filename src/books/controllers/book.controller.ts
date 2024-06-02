@@ -19,7 +19,7 @@ export class BookController {
 
   @Post('/createBook')
   async createBook(@Body() createBook: CreateBookDto): Promise<BookEntity> {
-    return this.bookService.createBook(createBook);
+    return this.bookService.createBookAuthor(createBook);
   }
 
   @Get('findAllBooks')

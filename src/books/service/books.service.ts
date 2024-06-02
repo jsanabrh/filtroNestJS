@@ -4,16 +4,32 @@ import { BookEntity } from '../entities/book.entity';
 import { Repository } from 'typeorm';
 import { CreateBookDto } from '../dtos/createBook.dto';
 import { UpdateBookDto } from '../dtos/updateBook.dto';
+import { AuthorEntity } from '../../authors/entities/author.entity';
 
 @Injectable()
 export class BookService {
   constructor(
     @InjectRepository(BookEntity)
     private readonly bookRepository: Repository<BookEntity>,
+    @InjectRepository(AuthorEntity)
+    private readonly authorRepository: Repository<AuthorEntity>,
   ) {}
 
-  async createBook(createBook: CreateBookDto): Promise<BookEntity> {
-    const book = this.bookRepository.create(createBook);
+  async createBookAuthor(createBookDto: CreateBookDto): Promise<BookEntity> {
+    const { idAuthor, ...bookData } = createBookDto;
+    const author = await this.authorRepository.findOne({
+      where: { idAuthor },
+    });
+
+    if (!author) {
+      throw new NotFoundException('Author not found');
+    }
+    const book = this.bookRepository.create({
+      ...bookData,
+      idAuthor: author.idAuthor,
+      nameAuthor: `${author.nameAuthor} ${author.lastNameAuthor}`,
+      author: author,
+    });
     return await this.bookRepository.save(book);
   }
 

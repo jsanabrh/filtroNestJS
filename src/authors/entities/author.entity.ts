@@ -12,6 +12,6 @@ export class AuthorEntity {
   @Column()
   lastNameAuthor: string;
 
-  @OneToMany(() => BookEntity, (book) => book.authors)
+  @OneToMany(() => BookEntity, (book) => book.author)
   books: BookEntity[];
 }

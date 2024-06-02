@@ -26,4 +26,9 @@ export class CreateBookDto {
   @IsString()
   @IsNotEmpty()
   priceBook: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  idAuthor: number;
 }

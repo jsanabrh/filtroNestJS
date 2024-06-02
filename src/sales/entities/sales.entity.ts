@@ -1,23 +1,20 @@
 import { BookEntity } from '../../books/entities/book.entity';
 import { UsersEntity } from '../../users/entities/users.entity';
 import {
-  Column,
   Entity,
   PrimaryGeneratedColumn,
   OneToMany,
   ManyToOne,
+  CreateDateColumn,
 } from 'typeorm';
 
 @Entity()
 export class SalesEntity {
   @PrimaryGeneratedColumn()
-  idSale: string;
+  idSale: number;
 
-  @Column()
-  priceSale: number;
-
-  @OneToMany(() => BookEntity, (book) => book.sales)
-  books: BookEntity[];
+  @CreateDateColumn()
+  createdAt?: Date;
 
   @ManyToOne(() => UsersEntity, (users) => users.sales)
   users: UsersEntity;
