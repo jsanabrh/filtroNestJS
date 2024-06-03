@@ -17,6 +17,9 @@ import { UsersModule } from './users/users.module';
 import { UsersService } from './users/service/users.service';
 import { UsersController } from './users/controller/users.controller';
 import { UsersEntity } from './users/entities/users.entity';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { HashingService } from './hashing/hashing.service';
+import { bcryptService } from './hashing/bcrypt.service';
 
 @Module({
   imports: [
@@ -48,6 +51,7 @@ import { UsersEntity } from './users/entities/users.entity';
     AuthorsModule,
     SalesModule,
     UsersModule,
+    AuthenticationModule,
   ],
   controllers: [
     BookController,
@@ -55,6 +59,12 @@ import { UsersEntity } from './users/entities/users.entity';
     SalesController,
     UsersController,
   ],
-  providers: [BookService, AuthorService, SalesService, UsersService],
+  providers: [
+    { provide: HashingService, useClass: bcryptService },
+    BookService,
+    AuthorService,
+    SalesService,
+    UsersService,
+  ],
 })
 export class AppModule {}
