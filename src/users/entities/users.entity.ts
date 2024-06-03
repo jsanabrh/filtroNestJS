@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { SalesEntity } from 'src/sales/entities/sales.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class UsersEntity {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   idUser: number;
 
   @Column()
@@ -10,4 +11,7 @@ export class UsersEntity {
 
   @Column()
   lastNameUser: string;
+
+  @OneToMany(() => SalesEntity, (sale) => sale.user)
+  sale: SalesEntity[];
 }

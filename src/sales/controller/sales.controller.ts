@@ -9,11 +9,11 @@ import { SalesEntity } from '../entities/sales.entity';
 export class SalesController {
   constructor(private readonly salesService: SalesService) {}
 
-  @Post()
+  @Post('/createSale')
   async createSale(
-    @Body() createSaleDto: CreateSalesDto,
+    @Body() createSalesDto: CreateSalesDto,
   ): Promise<SalesEntity> {
-    return this.salesService.createSale(createSaleDto);
+    return this.salesService.createSale(createSalesDto);
   }
 
   @Get('/findAllSales')

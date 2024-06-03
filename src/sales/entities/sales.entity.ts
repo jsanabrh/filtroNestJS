@@ -1,3 +1,4 @@
+import { UsersEntity } from 'src/users/entities/users.entity';
 import { BookEntity } from '../../books/entities/book.entity';
 import {
   Entity,
@@ -5,6 +6,9 @@ import {
   CreateDateColumn,
   ManyToMany,
   JoinTable,
+  ManyToOne,
+  JoinColumn,
+  Column,
 } from 'typeorm';
 
 @Entity()
@@ -18,4 +22,14 @@ export class SalesEntity {
   @ManyToMany(() => BookEntity, (book) => book.sales)
   @JoinTable()
   books: BookEntity[];
+
+  @ManyToOne(() => UsersEntity, (user) => user.sale)
+  @JoinColumn({ name: 'idUser' })
+  user: UsersEntity;
+
+  @Column()
+  idUser: number;
+
+  @Column()
+  nameUser: string;
 }

@@ -9,6 +9,10 @@ export class CreateSalesDto {
   createdAt: Date;
 
   @ApiProperty()
+  @IsInt()
+  idUser: number;
+
+  @ApiProperty({ type: [Number] })
   @IsArray()
   @IsInt({ each: true })
   bookIds: number[];
