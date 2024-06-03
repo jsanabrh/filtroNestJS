@@ -1,9 +1,18 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { SalesEntity } from 'src/sales/entities/sales.entity';
+import { AuthorEntity } from '../../authors/entities/author.entity';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+  ManyToMany,
+} from 'typeorm';
 
 @Entity()
 export class BookEntity {
   @PrimaryGeneratedColumn()
-  idBook: string;
+  idBook: number;
 
   @Column()
   nameBook: string;
@@ -18,5 +27,15 @@ export class BookEntity {
   priceBook: string;
 
   @Column()
-  stockBook: number;
+  idAuthor: number;
+
+  @Column({ nullable: true })
+  nameAuthor: string;
+
+  @ManyToOne(() => AuthorEntity, (author) => author.books)
+  @JoinColumn({ name: 'idAuthor' })
+  author: AuthorEntity;
+
+  @ManyToMany(() => SalesEntity, (sale) => sale.books)
+  sales: SalesEntity[];
 }

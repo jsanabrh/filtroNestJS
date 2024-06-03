@@ -16,6 +16,10 @@ import { SalesController } from './sales/controller/sales.controller';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/service/users.service';
 import { UsersController } from './users/controller/users.controller';
+import { UsersEntity } from './users/entities/users.entity';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { HashingService } from './hashing/hashing.service';
+import { bcryptService } from './hashing/bcrypt.service';
 
 @Module({
   imports: [
@@ -32,16 +36,22 @@ import { UsersController } from './users/controller/users.controller';
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
-      entities: [BookEntity, AuthorEntity, SalesEntity],
+      entities: [BookEntity, AuthorEntity, SalesEntity, UsersEntity],
       extra: {
         ssl: true,
       },
     }),
-    TypeOrmModule.forFeature([BookEntity, AuthorEntity, SalesEntity]),
+    TypeOrmModule.forFeature([
+      BookEntity,
+      AuthorEntity,
+      SalesEntity,
+      UsersEntity,
+    ]),
     BooksModule,
     AuthorsModule,
     SalesModule,
     UsersModule,
+    AuthenticationModule,
   ],
   controllers: [
     BookController,
@@ -49,6 +59,12 @@ import { UsersController } from './users/controller/users.controller';
     SalesController,
     UsersController,
   ],
-  providers: [BookService, AuthorService, SalesService, UsersService],
+  providers: [
+    { provide: HashingService, useClass: bcryptService },
+    BookService,
+    AuthorService,
+    SalesService,
+    UsersService,
+  ],
 })
 export class AppModule {}
