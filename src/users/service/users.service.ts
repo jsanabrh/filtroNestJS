@@ -39,4 +39,25 @@ export class UsersService {
 
     return await updateUserData;
   }
+
+  public async findBy({
+    key,
+    value,
+  }: {
+    key: keyof CreateUserDto;
+    value: any;
+  }) {
+    const user: UsersEntity = await this.userRepository
+      .createQueryBuilder('user')
+      .addSelect('user.password')
+      .where({ [key]: value })
+      .getOne();
+
+    return user;
+  }
+
+  async findById(idUser: number): Promise<UsersEntity> {
+    const user = await this.userRepository.findOne({ where: { idUser } });
+    return user;
+  }
 }

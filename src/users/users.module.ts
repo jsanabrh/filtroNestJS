@@ -13,5 +13,6 @@ import { bcryptService } from 'src/hashing/bcrypt.service';
     UsersService,
   ],
   controllers: [UsersController],
+  exports: [UsersService, TypeOrmModule, HashingService],
 })
 export class UsersModule {}
