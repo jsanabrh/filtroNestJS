@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsPositive } from 'class-validator';
+import { IsNumber, IsOptional, IsPositive, IsString } from 'class-validator';
 
 export class PaginationDto {
   @IsNumber()
@@ -10,4 +10,16 @@ export class PaginationDto {
   @IsPositive()
   @IsOptional()
   offset: number;
+
+  @IsOptional()
+  @IsString()
+  search?: string;
+
+  @IsOptional()
+  @IsString()
+  sortBy?: string;
+
+  @IsOptional()
+  @IsString()
+  order?: 'ASC' | 'DESC';
 }
