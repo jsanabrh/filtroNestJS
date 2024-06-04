@@ -6,11 +6,13 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BookService } from '../service/books.service';
 import { CreateBookDto } from '../dtos/createBook.dto';
 import { BookEntity } from '../entities/book.entity';
+import { PaginationDto } from '../dtos/pagination.dto';
 
 @ApiTags('Books')
 @Controller('books')
@@ -23,8 +25,8 @@ export class BookController {
   }
 
   @Get('findAllBooks')
-  async findAllBooks() {
-    return this.bookService.findAllBooks();
+  async findAllBooks(@Query() pagination: PaginationDto) {
+    return this.bookService.findAllBooks(pagination);
   }
 
   @Patch('/updateBook/:bookId')
